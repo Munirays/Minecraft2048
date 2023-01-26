@@ -1,8 +1,9 @@
 function HTMLActuator() {
-  this.tileContainer    = document.querySelector(".tile-container");
-  this.scoreContainer   = document.querySelector(".score-container");
-  this.bestContainer    = document.querySelector(".best-container");
-  this.messageContainer = document.querySelector(".game-message");
+  this.tileContainer        = document.querySelector(".tile-container");
+  this.scoreContainer       = document.querySelector(".score-container");
+  this.bestContainer        = document.querySelector(".best-container");
+  this.messageContainer     = document.querySelector(".game-message");
+  this.achievementContainer = document.querySelector(".achievement");
 
   this.score = 0;
 }
@@ -46,11 +47,16 @@ HTMLActuator.prototype.clearContainer = function (container) {
   }
 };
 
+// 把div改成了img
 HTMLActuator.prototype.addTile = function (tile) {
   var self = this;
 
   var wrapper   = document.createElement("div");
-  var inner     = document.createElement("div");
+  if (tile.value > 2048) {
+    var inner   =  document.createElement("div");
+  } else {
+    var inner   =  document.createElement("img");
+  }
   var position  = tile.previousPosition || { x: tile.x, y: tile.y };
   var positionClass = this.positionClass(position);
 
@@ -60,6 +66,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   if (tile.value > 2048) classes.push("tile-super");
 
   this.applyClasses(wrapper, classes);
+  this.applyImage(inner, tile.value)
 
   inner.classList.add("tile-inner");
   inner.textContent = tile.value;
@@ -69,10 +76,12 @@ HTMLActuator.prototype.addTile = function (tile) {
     window.requestAnimationFrame(function () {
       classes[2] = self.positionClass({ x: tile.x, y: tile.y });
       self.applyClasses(wrapper, classes); // Update the position
+      self.applyImage(wrapper, tile.value)
     });
   } else if (tile.mergedFrom) {
     classes.push("tile-merged");
     this.applyClasses(wrapper, classes);
+    this.applyImage(wrapper, tile.value)
 
     // Render the tiles that merged
     tile.mergedFrom.forEach(function (merged) {
@@ -81,6 +90,7 @@ HTMLActuator.prototype.addTile = function (tile) {
   } else {
     classes.push("tile-new");
     this.applyClasses(wrapper, classes);
+    this.applyImage(wrapper, tile.value)
   }
 
   // Add the inner part of the tile to the wrapper
@@ -92,6 +102,13 @@ HTMLActuator.prototype.addTile = function (tile) {
 
 HTMLActuator.prototype.applyClasses = function (element, classes) {
   element.setAttribute("class", classes.join(" "));
+};
+
+// 通过value添加图片
+// 从2到2048分别是：
+// 草方块 橡木 工作台 圆石 铁矿 钻石矿 黑曜石 地狱砖块 远古残骸 末地石 龙蛋
+HTMLActuator.prototype.applyImage = function (element, value) {
+  element.setAttribute("src", "img/" + value + ".webp");
 };
 
 HTMLActuator.prototype.normalizePosition = function (position) {
@@ -126,7 +143,7 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 
 HTMLActuator.prototype.message = function (won) {
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "You win!" : "Game over!";
+  var message = won ? "你赢了!" : "你死了!";
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;
@@ -136,4 +153,43 @@ HTMLActuator.prototype.clearMessage = function () {
   // IE only takes one value to remove at a time.
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
+};
+
+// 更新成就
+HTMLActuator.prototype.updateAchievement = function (achievementIndex) {
+  var achievementText = this.achievementContainer.querySelector(".achievement-text");
+  switch (achievementIndex){
+    case 16:
+      achievementText.textContent = "石器时代";
+      break;
+    case 32:
+      achievementText.textContent = "来硬的";
+      break;
+    case 64:
+      achievementText.textContent = "钻石！";
+      break;
+    case 128:
+      achievementText.textContent = "冰桶挑战";
+      break;
+    case 256:
+      achievementText.textContent = "勇往直下";
+      break;
+    case 512:
+      achievementText.textContent = "深藏不露";
+      break;
+    case 1024:
+      achievementText.textContent = "结束了？";
+      break;
+    case 2048:
+      achievementText.textContent = "下一世代";
+      break;
+    default:
+      return;
+  }
+
+  if (!this.achievementContainer.classList.contains("activation-achievement")) {
+    this.achievementContainer.classList.add("activation-achievement");
+  } else {
+    this.achievementContainer.getAnimations()[0].play();
+  }
 };

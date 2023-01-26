@@ -90,10 +90,10 @@ h1.title {
     animation-fill-mode: both; }
 
 .score-container:after {
-  content: "Score"; }
+  content: "当前得分"; }
 
 .best-container:after {
-  content: "Best"; }
+  content: "最佳分数"; }
 
 p {
   margin-top: 0;
@@ -437,6 +437,7 @@ hr {
     -ms-transform: scale(1);
     transform: scale(1); } }
 .tile-new .tile-inner {
+  display: inline-block;
   -webkit-animation: appear 200ms ease 100ms;
   -moz-animation: appear 200ms ease 100ms;
   animation: appear 200ms ease 100ms;
@@ -499,6 +500,7 @@ hr {
     -ms-transform: scale(1);
     transform: scale(1); } }
 .tile-merged .tile-inner {
+  display: inline-block;
   z-index: 20;
   -webkit-animation: pop 200ms ease 100ms;
   -moz-animation: pop 200ms ease 100ms;
@@ -756,3 +758,85 @@ hr {
     margin-top: 90px !important; }
   .game-message .lower {
     margin-top: 30px !important; } }
+
+.hide-overflow {
+      overflow: hidden;
+    }
+
+    .achievement {
+      z-index: 100;
+      background: #8f7a66;
+      border-style: solid;
+      border-radius: 10px;
+      padding: 0 20px;
+      text-decoration: none;
+      color: #f9f6f2;
+      height: 90px;
+      width: 300px;
+      line-height: 42px;
+      text-align: left;
+      float: right;
+      transform: translateX(400px);
+      position: fixed;
+    }
+
+    .activation-achievement {
+      -moz-animation: move 5s ease-out;
+      -webkit-animation: move 5s ease-out;
+      animation: move 5s ease-out;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translateX(100vw);
+      }
+
+      10% {
+        transform: translateX(65vw);
+      }
+
+      90% {
+        transform: translateX(65vw);
+      }
+
+      100% {
+        transform: translateX(100vw);
+      }
+    }
+
+    @-webkit-keyframes move {
+      0% {
+        transform: translateX(400px);
+      }
+
+      10% {
+        transform: translateX(0px);
+      }
+
+      90% {
+        transform: translateX(0px);
+      }
+
+      100% {
+        transform: translateX(400px);
+      }
+    }
+
+    @-moz-keyframes move {
+      0% {
+        transform: translateX(400px);
+      }
+
+      10% {
+        transform: translateX(0px);
+      }
+
+      90% {
+        transform: translateX(0px);
+      }
+
+      100% {
+        transform: translateX(400px);
+      }
+    }

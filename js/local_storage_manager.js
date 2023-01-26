@@ -21,6 +21,7 @@ window.fakeStorage = {
 function LocalStorageManager() {
   this.bestScoreKey     = "bestScore";
   this.gameStateKey     = "gameState";
+  this.achievementIndexKey = "achievementIndex"
 
   var supported = this.localStorageSupported();
   this.storage = supported ? window.localStorage : window.fakeStorage;
@@ -60,4 +61,12 @@ LocalStorageManager.prototype.setGameState = function (gameState) {
 
 LocalStorageManager.prototype.clearGameState = function () {
   this.storage.removeItem(this.gameStateKey);
+};
+
+LocalStorageManager.prototype.getAchievementIndex = function() {
+  return this.storage.getItem(this.achievementIndexKey) || 0;
+};
+
+LocalStorageManager.prototype.setAchievementIndex = function(achievementIndex) {
+  this.storage.setItem(this.achievementIndexKey, achievementIndex);
 };

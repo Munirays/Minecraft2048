@@ -17,6 +17,13 @@
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
+  <div class="hide-overflow">
+    <div class="achievement" style="transform: translateX(100vw)">
+      <p style="margin-top: 10px; margin-bottom :0px;font-size: 24px; color: #f4eeda;">成就已达成！</p>
+      <p class="achievement-text"></p>
+    </div>
+  </div>
+  
   <div class="container">
     <div class="heading">
       <h1 class="title">2048</h1>
@@ -27,16 +34,16 @@
     </div>
 
     <div class="above-game">
-      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-      <a class="restart-button">New Game</a>
+      <p class="game-intro">合并方块，进入末地，得到<strong>龙蛋</strong>！</p>
+      <a class="restart-button">再来一局</a>
     </div>
 
     <div class="game-container">
       <div class="game-message">
-        <p></p>
+        <p style="text-align:center"></p>
         <div class="lower">
-	        <a class="keep-playing-button">Keep going</a>
-          <a class="retry-button">Try again</a>
+	        <a class="keep-playing-button">继续原版</a>
+          <a class="retry-button">再次尝试</a>
         </div>
       </div>
 
@@ -73,15 +80,15 @@
     </div>
 
     <p class="game-explanation">
-      <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
+      <strong class="important">玩法：</strong>使用<strong>方向键</strong>移动方块。当两个方块相同时，它们就可以<strong>合并成新的方块</strong>！
     </p>
     <hr>
     <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
+    <strong class="important">注意：</strong>该网站是Minecraft改版的2048，不是官方2048网站。访问官方2048网站：<a href="https://play2048.co">https://play2048.co</a> 你也可以用手机游玩官方2048：<a href="http://git.io/2048">http://git.io/2048.</a>
     </p>
     <hr>
     <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+    由 <a href="https://munirays.github.io" target="_blank">Munirays</a> 复刻，由 <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli</a> 创建，基于 <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> ，概念上类似于 <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer</a> 。
     </p>
   </div>
 

@@ -1,8 +1,8 @@
 function GameManager(size, InputManager, Actuator, StorageManager) {
-  this.size           = size; // Size of the grid
-  this.inputManager   = new InputManager;
-  this.storageManager = new StorageManager;
-  this.actuator       = new Actuator;
+  this.size             = size; // Size of the grid
+  this.inputManager     = new InputManager;
+  this.storageManager   = new StorageManager;
+  this.actuator         = new Actuator;
 
   this.startTiles     = 2;
 
@@ -33,6 +33,9 @@ GameManager.prototype.isGameTerminated = function () {
 
 // Set up the game
 GameManager.prototype.setup = function () {
+  // 重置成就
+  // this.storageManager.setAchievementIndex(0);
+
   var previousState = this.storageManager.getGameState();
 
   // Reload the game from a previous game if present
@@ -154,6 +157,13 @@ GameManager.prototype.move = function (direction) {
 
         // Only one merger per row traversal?
         if (next && next.value === tile.value && !next.mergedFrom) {
+          // 添加成就
+          if ((self.storageManager.getAchievementIndex() < tile.value * 2) && 
+            (tile.value * 2 >= 16)) {
+            self.storageManager.setAchievementIndex(tile.value * 2);
+            self.actuator.updateAchievement(tile.value * 2);
+          }
+
           var merged = new Tile(positions.next, tile.value * 2);
           merged.mergedFrom = [tile, next];
 
